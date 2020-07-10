@@ -1,0 +1,72 @@
+<%- include("./paritals/header")%>
+<h1>profile data</h1>
+
+<p>username:<%=currentUser.username %></p>
+<p>email:<%=currentUser.email %></p>
+<p>img:
+    <img src="<%=currentUser.img %>" alt="">
+
+</p>
+<p>created at :<%=currentUser.create_date %></p>
+<h1>All the posts</h1>
+<div class="ui container">
+    <div class="ui relaxed divided items">
+        <% data.forEach(element => { %>
+        <div class="item">
+            <div class="ui medium image">
+                <img src="<%=element.img %>">
+            </div>
+            <div class="content">
+                <a href="/blogs/<%=element._id %>" class="header"><%=element.title%></a>
+                <div class="meta">
+                    <a>Created on :<%=moment(element.create_date).format('MMMM Do YYYY, h:mm:ss a')%></a>
+                    <% if (element.edited !== null) { %>
+                    <a>Edited on <%=moment(element.edited).format('MMMM Do YYYY, h:mm:ss a')%> </a>
+                    <% } %>
+
+                </div>
+                <div class="description">
+                    <%= element.body %>
+                </div>
+                <div class="extra">
+                    <img src="<%=currentUser.img%> " class="ui circular avatar image"> <%=currentUser.username%>
+                    <a class="ui right floated primary button" href="/blogs/<%=element._id %>">Learn More <i
+                            class="right chevron icon"></i></a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+<h1>All comments</h1>
+
+
+
+<div class="ui comments">
+    <% data.comments.forEach(element => { %>
+    <div class="comment">
+        <a class="avatar">
+            <img src="<%= currentUser.img %>">
+        </a>
+        <div class="content">
+            <a class="author"><%= element.author.username %> </a>
+            <div class="metadata">
+                <span class="date"> <%=moment(element.create_date).calendar()%> </span>
+            </div>
+            <div class="text">
+                <%= element.content%>
+            </div>
+            <div class="actions">
+                <a class="reply">Reply</a>
+                <a class="reply" href="/edit">Edit</a>
+                <form style="display: inline" method="POST" action="?_method=DELETE">
+                    <button class="reply" href="">Delete</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+<%- include("./paritals/footer")%>

@@ -1,0 +1,89 @@
+<%- include("../paritals/header")%>
+<div class="ui main text container">
+    <div class="ui top attached segment">
+        <div class="ui huge header"><%=blogData.title%></div>
+        <div class="item">
+            <img class="ui centered rounded image" src="<%=blogData.img %>">
+            <div class="content">
+                <div class="meta">
+                    <span><%=moment(blogData.create_date).format('MMMM Do YYYY, h:mm:ss a')%></span>
+                </div>
+                <div class="description">
+                    username <%= blogData.author.username%>
+                    <p> <%= blogData.body %></p>
+                </div>
+            </div>
+        </div>
+        <% if (currentUser) { %>
+        <% if (JSON.stringify(currentUser._id) === JSON.stringify(blogData.author._id)) { %>
+        <a href="/blogs/<%=blogData._id%>/edit" class="ui orange basic button">Update POST</a>
+        <form style="display: inline" method="POST" action="/blogs/<%= blogData._id%>?_method=DELETE">
+            <button class="ui red basic button" type="submit">Delete POST</button>
+        </form>
+        <% } %>
+        <% } %>
+
+
+    </div>
+   
+    <div class="ui comments segment">
+        <a href="/blogs/<%=blogData._id%>/comment/new" class="ui primary button right floated ">New comment <i
+            class="plus icon"></i> </a>
+        <h3 class="ui dividing header">Comments</h3>
+
+        <% blogData.comments.forEach(element => { %>
+        <div class="comment">
+            <a class="avatar">
+                <img src="<%= element.author.img %>">
+            </a>
+            <div class="content">
+                <a class="author"><%= element.author.username %> </a>
+                <div class="metadata">
+                    <span class="date"><%=moment(element.create_date).calendar()%> </span>
+                </div>
+                <div class="text">
+                    <p><%= element.content%></p>
+                </div>
+                <div class="actions">
+                    <a class="reply" href="/blogs/<%=blogData._id%>/comment/<%=element._id%>/reply/new">Reply</a>
+                    <% if (currentUser) { %>
+                    <% if (JSON.stringify(currentUser._id) === JSON.stringify(element.author._id)) { %>
+                    <a class="reply" href="/blogs/<%=blogData._id%>/comment/<%=element._id%>/edit">Edit</a>
+                    <form style="display: inline" method="POST"
+                        action="/blogs/<%=blogData._id%>/comment/<%=element._id%>?_method=DELETE">
+                        <button class="reply" href="">Delete</button>
+                    </form>
+                    <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <% if (element.reply.length >= 1 && element.reply.length !==0 ) { %>
+            <% element.reply.forEach(item => { %>
+            <div class="comments" style="margin-left: 17%;">
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="<%=item.author.img %>">
+                    </a>
+                    <div class="content">
+                        <a class="author"><%=item.author.username %></a>
+                        <div class="metadata">
+                            <span class="date"><%=moment(item.create_date).format('MMMM Do YYYY, h:mm:ss a')%></span>
+                        </div>
+                        <div class="text">
+                            <%=item.content %>
+                        </div>
+                        <div class="actions">
+                            <a class="reply">Reply</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+            <% } %>
+
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include("../paritals/footer")%>

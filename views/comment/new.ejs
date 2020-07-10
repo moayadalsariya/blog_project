@@ -1,0 +1,13 @@
+<%- include("../paritals/header")%>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New Comment</div>
+    <form class="ui form" action="/blogs/<%=post_id%>/comment" method="POST">
+        <div class="field">
+            <label>Content</label>
+            <input type="text" name="comment[content]">
+        </div>
+        <button class="ui big violet basic button">Create Comment</button>
+    </form>
+</div>
+<%- include("../paritals/footer")%>

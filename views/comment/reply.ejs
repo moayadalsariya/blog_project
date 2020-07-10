@@ -1,0 +1,13 @@
+<%- include("../paritals/header")%>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">New reply</div>
+    <form class="ui form" action="/blogs/<%=post_id%>/comment/<%=comment_id%>/reply" method="POST">
+        <div class="field">
+            <label>Content</label>
+            <input type="text" name="reply[content]">
+        </div>
+        <button class="ui big violet basic button">Create reply</button>
+    </form>
+</div>
+<%- include("../paritals/footer")%>

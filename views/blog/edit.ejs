@@ -1,0 +1,22 @@
+<%- include("../paritals/header")%>
+
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit Post</div>
+    <form class="ui form" action="/blogs/<%= blogData._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" value="<%= blogData.title%>">
+        </div>
+        <div class="field">
+            <label>Image</label>
+            <input type="file" name="blog[img]">
+        </div>
+        <div class="field">
+            <label>Post Content</label>
+            <textarea name="blog[body]"><%= blogData.body%></textarea>
+        </div>
+        <button class="ui big violet basic button">Edit Post</button>
+    </form>
+</div>
+<%- include("../paritals/footer")%>

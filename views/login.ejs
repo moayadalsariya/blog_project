@@ -1,0 +1,23 @@
+<%- include("./paritals/header")%>
+
+<div class="ui grid">
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column ui segment">
+            <h1>login</h1>
+            <form action="/login" method="post" class="ui form">
+                <div class="field required">
+                    <label>username</label>
+                    <input type="text" placeholder="username" name="username" required>
+                </div>
+                <div class="field required">
+                    <label>password</label>
+                    <input type="password" placeholder="password" name="password" required>
+                </div>
+                <button class="ui button blue">Submit</button>
+            </form>
+        </div>
+        <div class="column"></div>
+    </div>
+</div>
+<%- include("./paritals/footer")%>

@@ -1,0 +1,13 @@
+<%- include("../paritals/header")%>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit Comment</div>
+    <form class="ui form" action="/blogs/<%=blog_id%>/comment/<%=foundComment._id%>?_method=PUT" method="POST">
+        <div class="field">
+            <label>Content</label>
+            <input type="text" name="comment[content]" value="<%=foundComment.content%>">
+        </div>
+        <button class="ui big violet basic button">Edit Comment</button>
+    </form>
+</div>
+<%- include("../paritals/footer")%>

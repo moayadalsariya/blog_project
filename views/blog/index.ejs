@@ -1,0 +1,40 @@
+<%- include("../paritals/header")%>
+<div class="ui container">
+    <div class="ui relaxed divided items">
+        <div class="ui message" style="margin-top: 5%;">
+            <h1 class="ui header">Welcome to our blog post website!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+                unique.</p>
+            <a class="ui blue button" href="/blogs/new">Add New Post &raquo;</a>
+        </div>
+        <% data.forEach(element => { %>
+        <div class="item">
+            <div class="ui medium image">
+                <img src="<%=element.img %>">
+            </div>
+            <div class="content">
+                <a href="/blogs/<%=element._id %>" class="header"><%=element.title%></a>
+                <div class="meta">
+                    <a>Created on :<%=moment(element.create_date).format('MMMM Do YYYY, h:mm:ss a')%></a>
+                    <% if (element.edited !== null) { %>
+                    <a>Edited on <%=moment(element.edited).format('MMMM Do YYYY, h:mm:ss a')%> </a>
+                    <% } %>
+
+                </div>
+                <div class="description">
+                    <%= element.body %>
+                </div>
+                <div class="extra">
+                    <img src="<%=element.author.img%> " class="ui circular avatar image"> <%=element.author.username%> 
+                    <a class="ui right floated primary button" href="/blogs/<%=element._id %>">Learn More <i
+                            class="right chevron icon"></i></a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+
+    </div>
+</div>
+
+<%- include("../paritals/footer")%>
