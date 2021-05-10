@@ -11,7 +11,7 @@ Blog post web app to share your post to everyone
 * first you must clone the project using git
 
 ```bash
-git clone https://github.com/moyad123/blog_project.git
+git clone https://github.com/moayadalsariya/blog_project.git
 ```
 * Then cd to blog_project
 
